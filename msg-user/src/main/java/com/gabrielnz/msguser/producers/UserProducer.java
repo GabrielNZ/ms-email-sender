@@ -15,8 +15,7 @@ public class UserProducer {
     @Value("${broker.queue.email.name}")
     private String routingKey;
 
-    public void publishMessageEmail(User user){
-        EmailDTO email = new EmailDTO(user.getUserId(), user.getEmail(), "Cadastro realizado com sucesso", user.getName()+", seja bem vindo(a)!\n Agradecemos o seu cadastro, aproveite as novidades e beneficios do programa...");
-        rabbitTemplate.convertAndSend("",routingKey, email);
+    public void publishMessageEmail(EmailDTO emailDTO) {
+        rabbitTemplate.convertAndSend("",routingKey, emailDTO);
     }
 }
